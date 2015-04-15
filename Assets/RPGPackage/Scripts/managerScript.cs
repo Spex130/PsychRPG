@@ -9,6 +9,18 @@ public class managerScript : MonoBehaviour {
 	//public GameObject mainMenuPoint; 
 
 
+	//Options Menu Panel
+	public Slider gameVolumeSlider;
+	public float gameVolume = 1f;
+
+	public Toggle muteToggle;
+	public bool isMute = false;
+
+	public Toggle notifyToggle;
+	public bool shouldNotify = false;
+
+	public Slider animationSpeedSlider;
+	public float gameSpeed = 1f;
 
 
 	//These are the overarching gamestates
@@ -29,7 +41,7 @@ public class managerScript : MonoBehaviour {
 
 	//This specificall handles our profile menu state
 	public enum stateProfile{inactive, activate, active, deactivate};
-	//All the gameObject that holds our main Menu
+	//All the gameObjects that holds our Profile
 	public GameObject profileMenu;
 	public stateProfile profileState = stateProfile.inactive;
 	public bool isProfileActive = false;
@@ -37,6 +49,12 @@ public class managerScript : MonoBehaviour {
 	//Combat Menu variablws
 	public combatManager combatMenu;
 
+	//Next, stuff for our OPTIONS PANEL
+	public enum stateOption{inactive, activate, active, deactivate};
+	//All the gameObjects that hold our Options panel
+	public GameObject optionMenu;
+	public stateOption optionState = stateOption.inactive;
+	public bool isOptionActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +70,7 @@ public class managerScript : MonoBehaviour {
 			break;
 		
 		case state.optionScreen:
+			optionStateUpdate();
 			break;
 		
 		case state.combatScreen:
@@ -123,6 +142,34 @@ public class managerScript : MonoBehaviour {
 		}
 	}
 
+	public void optionStateUpdate(){//YOUREHERE
+		switch(optionState){
+		case stateOption.activate:
+			optionMenu.transform.parent = spawnPoint.transform;
+			optionMenu.transform.position = new Vector3(0,0,0);
+			optionMenu.transform.localPosition = new Vector3(0,0,0);
+			optionMenu.transform.localScale = new Vector3(1,1,1);
+			
+			optionState = stateOption.active;
+			
+			break;
+
+		case stateOption.active:
+			gameVolume = gameVolumeSlider.value;
+
+			isMute = muteToggle.isOn;
+
+			shouldNotify = notifyToggle.isOn;
+			
+			gameSpeed = animationSpeedSlider.value;
+			break;
+
+		case stateOption.deactivate:
+			
+			break;
+		}
+	}
+	
 
 
 	//Swapping functions
@@ -149,5 +196,18 @@ public class managerScript : MonoBehaviour {
 		menuState = stateMenu.activate;
 	}
 
+	public void switchToOptions(){
+		mainMenu.transform.localPosition = new Vector3(-500,0,0);
+		menuState = stateMenu.inactive;
+		gameState = state.optionScreen;
+		optionState = stateOption.activate;
+	}
+
+	public void switchOptionToMenu(){
+		optionState = stateOption.deactivate;
+		optionMenu.transform.localPosition = new Vector3(-500,0,0);
+		gameState = state.menuScreen;
+		menuState = stateMenu.activate;
+	}
 
 }

@@ -17,6 +17,7 @@ public class characterScript : MonoBehaviour {
 	public int dex = 10;
 	public int mDef = 10;
 	public int mag = 10;
+	public string status;
 
 	public bool deathState= false;
 

@@ -95,10 +95,10 @@ public class colorBlock : MonoBehaviour
 	public void disableColors ()
 	{
 		blockColor = -1;
-			redSphere.renderer.enabled = false;
-			blueSphere.renderer.enabled = false;
-			greenSphere.renderer.enabled = false;
-			yellowSphere.renderer.enabled = false;
+			redSphere.GetComponent<Renderer>().enabled = false;
+			blueSphere.GetComponent<Renderer>().enabled = false;
+			greenSphere.GetComponent<Renderer>().enabled = false;
+			yellowSphere.GetComponent<Renderer>().enabled = false;
 			
 
 	}
@@ -107,16 +107,16 @@ public class colorBlock : MonoBehaviour
 	{
 
 				if (chosenColor == 0) {
-						redSphere.renderer.enabled = false;
+						redSphere.GetComponent<Renderer>().enabled = false;
 				}
 				if (chosenColor == 1) {
-						blueSphere.renderer.enabled = false;
+						blueSphere.GetComponent<Renderer>().enabled = false;
 				}
 				if (chosenColor == 2) {
-					greenSphere.renderer.enabled = false;
+					greenSphere.GetComponent<Renderer>().enabled = false;
 				}
 				if (chosenColor == 3) {
-						yellowSphere.renderer.enabled = false;
+						yellowSphere.GetComponent<Renderer>().enabled = false;
 				}
 
 	}
@@ -126,16 +126,16 @@ public class colorBlock : MonoBehaviour
 	{
 
 			if (chosenColor == 0) {
-					redSphere.renderer.enabled = true;
+					redSphere.GetComponent<Renderer>().enabled = true;
 			}
 			if (chosenColor == 1) {
-					blueSphere.renderer.enabled = true;
+					blueSphere.GetComponent<Renderer>().enabled = true;
 			}
 			if (chosenColor == 2) {
-					greenSphere.renderer.enabled = true;
+					greenSphere.GetComponent<Renderer>().enabled = true;
 			}
 			if (chosenColor == 3) {
-					yellowSphere.renderer.enabled = true;
+					yellowSphere.GetComponent<Renderer>().enabled = true;
 			}
 			
 	}

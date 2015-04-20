@@ -23,6 +23,6 @@ public class faderScript : MonoBehaviour {
 		}
 
 		moveInt -= 1 * reverser;
-		renderer.material.color = new Color(255,255,255, moveInt);
+		GetComponent<Renderer>().material.color = new Color(255,255,255, moveInt);
 	}
 }

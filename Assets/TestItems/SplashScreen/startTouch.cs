@@ -25,7 +25,7 @@ public class startTouch : MonoBehaviour {
 				//Here is where we check each individual touch and see what it is doing.
 				foreach(Touch touch in Input.touches){
 					
-					Ray ray = camera.ScreenPointToRay (touch.position);
+					Ray ray = GetComponent<Camera>().ScreenPointToRay (touch.position);
 					
 					
 					

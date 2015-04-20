@@ -13,7 +13,7 @@ public class removalBlock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alpha);
+		GetComponent<Renderer>().material.color = new Color(GetComponent<Renderer>().material.color.r, GetComponent<Renderer>().material.color.g, GetComponent<Renderer>().material.color.b, alpha);
 		if(alpha >= 0){
 			alpha-= alphaDec;
 			transform.localScale += new Vector3(.1f,.1f,.1f);

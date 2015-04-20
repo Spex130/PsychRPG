@@ -21,6 +21,8 @@ public class characterScript : MonoBehaviour {
 
 	public bool deathState= false;
 
+	public itemClassScript[] itemList;// = new itemClassScript[20];
+
 	public void takeDamage(int damage){
 		curHealth-=damage;
 		deathCheck();

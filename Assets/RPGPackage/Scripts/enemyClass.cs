@@ -33,7 +33,6 @@ public class enemyClass : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		hp = Random.Range (10,50);
 		hpMax = hp;
 	}
 	

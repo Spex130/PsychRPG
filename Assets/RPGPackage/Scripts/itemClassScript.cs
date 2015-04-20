@@ -1,7 +1,7 @@
 ﻿using System;
-namespace AssemblyCSharp
-{
-	public class itemClassScript
+using UnityEngine;
+
+	public class itemClassScript : MonoBehaviour
 	{
 		public string name;
 		public string effect;
@@ -35,5 +35,5 @@ namespace AssemblyCSharp
 		}
 
 	}
-}
+
 

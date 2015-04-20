@@ -1,7 +1,7 @@
 using System;
-namespace AssemblyCSharp
-{
-	public class weaponClassScript
+using UnityEngine;
+
+	public class weaponClassScript : MonoBehaviour
 	{
 		public string specialEffect; //magic, fire, poison, confusion, ice, slow
 		public int attackDamage; 
@@ -60,7 +60,7 @@ namespace AssemblyCSharp
 				character.atk = character.atk + userAdditionValue;
 			}
 			character.status = characterStatusChange;//shows current addition to status "Magic UP + 5"
-			Random r = new Random ();
+			System.Random r = new System.Random ();
 			float num = r.Next (0, 1);
 			//critical attack chance
 			if (num == this.criticalHitChance) {
@@ -100,5 +100,5 @@ namespace AssemblyCSharp
 
 
 	}
-}
+
 

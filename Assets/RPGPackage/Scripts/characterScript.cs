@@ -12,11 +12,11 @@ public class characterScript : MonoBehaviour {
 
 	//Our attributes;
 	public int atk = 10;
-	public int pDef = 10;
-	public int spd = 10;
-	public int dex = 10;
-	public int mDef = 10;
-	public int mag = 10;
+	public int pDef = 15;
+	public int spd = 18;
+	public int dex = 13;
+	public int mDef = 22;
+	public int mag = 6;
 	public string status;
 
 	public bool deathState= false;
@@ -29,6 +29,7 @@ public class characterScript : MonoBehaviour {
 	public void deathCheck(){
 		if(curHealth <= 0){
 			deathState = true;
+			curHealth=0;
 		}
 	}
 

@@ -125,7 +125,6 @@ public class managerScript : MonoBehaviour {
 		switch(menuState){
 		case stateMenu.activate:
 			player.curHealth = player.maxHealth;
-			player.deathState = false;
 				//mainMenu = (GameObject)GameObject.Instantiate(mainMenuPoint,spawnPoint.transform.position, spawnPoint.transform.rotation);
 				mainMenu.transform.parent = spawnPoint.transform;
 				mainMenu.transform.position = new Vector3(0,0,0);

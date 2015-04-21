@@ -93,7 +93,7 @@ public class combatManager : MonoBehaviour {
 	
 	public void healthbarUpdate(){
 		playerHealthImg.fillAmount = (float)player.curHealth/(float)player.maxHealth;
-		playerHealthText.text = player.curHealth + "/" + player.maxHealth;
+		playerHealthText.text = player.maxHealth + "/" + player.curHealth;
 
 		if(opponent.isDead()){
 			enemyHealthImg.fillAmount = 0;
@@ -101,7 +101,7 @@ public class combatManager : MonoBehaviour {
 		}
 		else{
 			enemyHealthImg.fillAmount = (float)opponent.hp/(float)opponent.hpMax;
-			enemyHealthText.text = opponent.hp+"/"+opponent.hpMax;
+			enemyHealthText.text = opponent.hpMax+"/"+opponent.hp;
 		}
 	}
 
@@ -173,14 +173,13 @@ public class combatManager : MonoBehaviour {
 		switch(fightState){
 		case combatState.fightStart:
 			//Fill the Status bar with empty stuff
-			int num = Random.Range(0,4);
 			populateStatusBar();
 
 			winPoint.transform.localPosition = new Vector3(0,5000,0);
 			losePoint.transform.localPosition = new Vector3(-30,5000,0);
 
 
-			opponent = (enemyClass)GameObject.Instantiate(enemyPool[num], enemySpawn.transform.position, enemySpawn.transform.rotation);
+			opponent = (enemyClass)GameObject.Instantiate(enemyPool[0], enemySpawn.transform.position, enemySpawn.transform.rotation);
 			opponent.transform.parent = enemySpawn.transform;
 			opponent.transform.localPosition = new Vector3(0,0,0);
 			statusBarSay("An enemy "+opponent.name+" appeared!");
@@ -192,7 +191,6 @@ public class combatManager : MonoBehaviour {
 		case combatState.enemyTurn:
 			enemyAttack();
 			if(player.isDead()){
-				GameObject.Destroy(opponent.gameObject);
 				statusBarSay("You lose!");
 				fightState = combatState.lose;
 			}
@@ -204,7 +202,6 @@ public class combatManager : MonoBehaviour {
 			winPoint.transform.localPosition = new Vector3(0,0,0);
 			break;
 		case combatState.lose:
-
 			losePoint.transform.localPosition = new Vector3(0,0,0);
 			break;
 		

@@ -56,6 +56,13 @@ public class managerScript : MonoBehaviour {
 	public stateOption optionState = stateOption.inactive;
 	public bool isOptionActive = false;
 
+	//Next, stuff for our ITEMS PANEL
+	public enum stateItemMenu{inactive, activate, active, deactivate};
+	//All the gameObjects that hold our Options panel
+	public GameObject itemMenu;
+	public stateItemMenu itemMenuState = stateItemMenu.inactive;
+	public bool isItemMenuActive = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -98,9 +105,31 @@ public class managerScript : MonoBehaviour {
 			break;
 		
 		case state.itemScreen:
+			itemMenuStateUpdate();
 			break;
 		}
 
+	}
+
+	public void itemMenuStateUpdate(){
+		switch(itemMenuState){
+		case stateItemMenu.activate:
+			itemMenu.transform.parent = spawnPoint.transform;
+			itemMenu.transform.position = new Vector3(0,0,0);
+			itemMenu.transform.localPosition = new Vector3(0,0,0);
+			itemMenu.transform.localScale = new Vector3(1,1,1);
+			
+			itemMenuState = stateItemMenu.active;
+			
+			break;
+			
+		case stateItemMenu.deactivate:
+			itemMenu.transform.localPosition = new Vector3(700,0,0);
+			gameState = state.menuScreen;
+			menuState = stateMenu.activate;
+			itemMenuState = stateItemMenu.inactive;
+			break;
+		}
 	}
 
 	public void profileStateUpdate(){
@@ -165,7 +194,9 @@ public class managerScript : MonoBehaviour {
 			break;
 
 		case stateOption.deactivate:
-			
+			optionMenu.transform.localPosition = new Vector3(-500,0,0);
+			gameState = state.menuScreen;
+			menuState = stateMenu.activate;
 			break;
 		}
 	}
@@ -203,11 +234,19 @@ public class managerScript : MonoBehaviour {
 		optionState = stateOption.activate;
 	}
 
+	public void switchToItemsMenu(){
+		mainMenu.transform.localPosition = new Vector3(-500,0,0);
+		menuState = stateMenu.inactive;
+		gameState = state.itemScreen;
+		itemMenuState = stateItemMenu.activate;
+	}
+
 	public void switchOptionToMenu(){
 		optionState = stateOption.deactivate;
-		optionMenu.transform.localPosition = new Vector3(-500,0,0);
-		gameState = state.menuScreen;
-		menuState = stateMenu.activate;
+	}
+
+	public void switchItemToMenu(){
+		itemMenuState = stateItemMenu.deactivate;
 	}
 
 }

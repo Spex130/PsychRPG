@@ -29,6 +29,7 @@ public class characterScript : MonoBehaviour {
 	public void deathCheck(){
 		if(curHealth <= 0){
 			deathState = true;
+			curHealth = 0;
 		}
 	}
 

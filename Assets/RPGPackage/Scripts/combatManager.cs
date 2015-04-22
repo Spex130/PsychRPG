@@ -93,7 +93,7 @@ public class combatManager : MonoBehaviour {
 	
 	public void healthbarUpdate(){
 		playerHealthImg.fillAmount = (float)player.curHealth/(float)player.maxHealth;
-		playerHealthText.text = player.maxHealth + "/" + player.curHealth;
+		playerHealthText.text = player.curHealth + "/" + player.maxHealth;
 
 		if(opponent.isDead()){
 			enemyHealthImg.fillAmount = 0;
@@ -101,7 +101,7 @@ public class combatManager : MonoBehaviour {
 		}
 		else{
 			enemyHealthImg.fillAmount = (float)opponent.hp/(float)opponent.hpMax;
-			enemyHealthText.text = opponent.hpMax+"/"+opponent.hp;
+			enemyHealthText.text = opponent.hp+"/"+opponent.hpMax;
 		}
 	}
 
@@ -127,10 +127,11 @@ public class combatManager : MonoBehaviour {
 	}
 
 	public void enemyAttack(){
-		int giveDamage = opponent.attack ();
+		int giveDamage = opponent.attack () + Random.Range (-1, 2);
 		player.takeDamage (giveDamage);
 		statusBarSay("You take "+giveDamage+" damage!");
 		if(player.isDead()){
+			GameObject.Destroy(opponent.gameObject);
 			losePoint.transform.localPosition = new Vector3(0,0,5000);
 			fightState = combatState.lose;
 		}
@@ -142,7 +143,7 @@ public class combatManager : MonoBehaviour {
 
 	public void playerAttack(){
 		if(fightState == combatState.playerTurn){
-			int giveDamage = player.attack();
+			int giveDamage = player.attack() + Random.Range (-1, 2);
 			opponent.takeDamage (giveDamage);
 			statusBarSay("You attack for "+giveDamage+" damage!");
 			turnCount++;
@@ -158,6 +159,21 @@ public class combatManager : MonoBehaviour {
 			else{
 				fightState = combatState.enemyTurn;
 			}
+		}
+	}
+
+	public void playerDefend(){
+		if(fightState == combatState.playerTurn){
+			//int giveDamage = player.attack() + Random.Range (-1, 2);
+			//opponent.takeDamage (giveDamage);
+
+			turnCount++;
+
+			statusBarSay("You defended!");
+
+
+			fightState = combatState.enemyTurn;
+
 		}
 	}
 
@@ -179,7 +195,7 @@ public class combatManager : MonoBehaviour {
 			losePoint.transform.localPosition = new Vector3(-30,5000,0);
 
 
-			opponent = (enemyClass)GameObject.Instantiate(enemyPool[0], enemySpawn.transform.position, enemySpawn.transform.rotation);
+			opponent = (enemyClass)GameObject.Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], enemySpawn.transform.position, enemySpawn.transform.rotation);
 			opponent.transform.parent = enemySpawn.transform;
 			opponent.transform.localPosition = new Vector3(0,0,0);
 			statusBarSay("An enemy "+opponent.name+" appeared!");
